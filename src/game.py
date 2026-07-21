@@ -36,7 +36,10 @@ class Game :
 
             if self.snake.body[0] == self.food.position:
                 self.snake.grow()
-                self.food.position = self.food.generate(self.snake.body)
+                self.food.regenerate(self.snake.body)
+            
+            if self.snake.wall_collision():
+                self.en_cours = False
 
             self.screen.fill(BACKGROUND_COLOR)
             self.snake.draw(self.screen)
