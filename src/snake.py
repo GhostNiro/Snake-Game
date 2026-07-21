@@ -1,5 +1,5 @@
 import pygame
-from src.constants import TAILLE_CASE, SNAKE_HEAD_COLOR, SNAKE_BODY_COLOR
+from src.constants import *
 
 class Snake :
     def __init__(self, x , y):
