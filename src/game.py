@@ -38,8 +38,9 @@ class Game :
                 self.snake.grow()
                 self.food.regenerate(self.snake.body)
             
-            if self.snake.wall_collision():
+            if self.snake.wall_collision() or self.snake.self_collision():
                 self.en_cours = False
+                print("GAME OVER")
 
             self.screen.fill(BACKGROUND_COLOR)
             self.snake.draw(self.screen)
