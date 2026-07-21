@@ -13,6 +13,9 @@ class Food :
             y = random.randint(0, LONGUEUR // TAILLE_CASE - 1)
             if (x, y) not in snake_body:
                 return (x, y)
+    
+    def regenerate(self, snake_body):
+        self.position = self.generate(snake_body)
 
     def draw(self, screen):
         pygame.draw.rect(screen, FOOD_COLOR, (self.position[0] * TAILLE_CASE, self.position[1] * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE))
