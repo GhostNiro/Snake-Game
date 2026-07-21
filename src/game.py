@@ -15,11 +15,12 @@ class Game :
     
     def handle_events(self):
         '''fonction qui s'occupe de la gestion des evenements (clavier et souris)'''
-        for event in pygame.event.get():       
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                self.en_cours = False
+
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.en_cours = False
-                elif event.key == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     self.snake.set_direction((0, -1))
                 elif event.key == pygame.K_DOWN:
                     self.snake.set_direction((0, 1))
@@ -32,6 +33,11 @@ class Game :
         while self.en_cours:
             self.handle_events()
             self.snake.update()
+
+            if self.snake.body[0] == self.food.position:
+                self.snake.grow()
+                self.food.position = self.food.generate(self.snake.body)
+
             self.screen.fill(BACKGROUND_COLOR)
             self.snake.draw(self.screen)
             self.food.draw(self.screen)

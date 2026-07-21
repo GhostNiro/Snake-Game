@@ -5,6 +5,7 @@ class Snake :
     def __init__(self, x , y):
         self.body = [(x,y)] #liste de tuples qui representent les cases que le snake occupe, le premier tuple correspond aux coordonnees de la tete
         self.direction = (1,0) #par defaut le snake se deplace vers la droite
+        self.growing = False
 
     def set_direction(self, new_dir) :
         '''fonction qui permet de changer la direction du snake'''
@@ -18,8 +19,12 @@ class Snake :
         new_head = (self.body[0][0] + self.direction[0], self.body[0][1] + self.direction[1])
         #on ajoute la nouvelle tete au debut de la liste
         self.body.insert(0, new_head)
-        #on supprime la queue du snake
-        self.body.pop()
+        
+        if self.growing :
+            self.growing = False
+        else :
+            #on supprime la derniere case du snake
+            self.body.pop()
 
     def draw(self, screen):
         '''fonction qui va dessiner le snake a l'ecran'''
@@ -30,3 +35,6 @@ class Snake :
                 color = SNAKE_BODY_COLOR
                 
             pygame.draw.rect(screen, color, (x * TAILLE_CASE, y * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE))
+
+    def grow(self):
+        self.growing = True
