@@ -38,3 +38,7 @@ class Snake :
 
     def grow(self):
         self.growing = True
+
+    def wall_collision(self):
+        head_x, head_y = self.body[0]
+        return head_x < 0 or head_x >= NB_CASES or head_y < 0 or head_y >= NB_CASES

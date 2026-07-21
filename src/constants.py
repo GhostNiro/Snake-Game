@@ -5,3 +5,4 @@ SNAKE_BODY_COLOR = (0, 200, 0) #vert fonce
 BACKGROUND_COLOR = (0, 0, 0) #noir
 FOOD_COLOR = (255, 0, 0) #rouge
 FPS = 10
+NB_CASES = LONGUEUR // TAILLE_CASE
