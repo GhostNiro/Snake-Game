@@ -1,7 +1,8 @@
 import pygame
 import sys
-from src.constants import  LONGUEUR, BACKGROUND_COLOR, FPS
+from src.constants import  *
 from src.snake import Snake
+from src.food import Food
 
 class Game : 
     def __init__(self):
@@ -10,6 +11,7 @@ class Game :
         pygame.display.set_caption("SNAKE GAME")  
         self.en_cours = True #variable qui permet de savoir si le jeu est en cours ou non (pour la boucle principal du jeu)
         self.snake = Snake(10, 10)
+        self.food = Food(self.snake.body)
     
     def handle_events(self):
         '''fonction qui s'occupe de la gestion des evenements (clavier et souris)'''
@@ -32,6 +34,7 @@ class Game :
             self.snake.update()
             self.screen.fill(BACKGROUND_COLOR)
             self.snake.draw(self.screen)
+            self.food.draw(self.screen)
             pygame.display.flip()
             pygame.time.Clock().tick(FPS)
             
