@@ -14,6 +14,7 @@ class Game :
         self.food = Food(self.snake.body)
         self.font = pygame.font.Font(None, 36)
         self.score = 0
+        self.speed = FPS 
     
     def handle_events(self):
         '''fonction qui s'occupe de la gestion des evenements (clavier et souris)'''
@@ -40,6 +41,8 @@ class Game :
                 self.snake.grow()
                 self.food.regenerate(self.snake.body)
                 self.score += 1
+                if self.score % 10 == 0 and self.score > 0 :
+                    self.speed += 5
 
             if self.snake.wall_collision() or self.snake.self_collision():
                 self.en_cours = False
@@ -52,7 +55,7 @@ class Game :
             score_texte = self.font.render(f"SCORE : {self.score}", True, (255, 255, 255))
             self.screen.blit(score_texte, (10, 10))
             pygame.display.flip()
-            pygame.time.Clock().tick(FPS)
+            pygame.time.Clock().tick(self.speed)
             
         pygame.quit()
         sys.exit()
