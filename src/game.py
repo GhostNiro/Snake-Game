@@ -12,6 +12,8 @@ class Game :
         self.en_cours = True #variable qui permet de savoir si le jeu est en cours ou non (pour la boucle principal du jeu)
         self.snake = Snake(10, 10)
         self.food = Food(self.snake.body)
+        self.font = pygame.font.Font(None, 36)
+        self.score = 0
     
     def handle_events(self):
         '''fonction qui s'occupe de la gestion des evenements (clavier et souris)'''
@@ -37,7 +39,8 @@ class Game :
             if self.snake.body[0] == self.food.position:
                 self.snake.grow()
                 self.food.regenerate(self.snake.body)
-            
+                self.score += 1
+
             if self.snake.wall_collision() or self.snake.self_collision():
                 self.en_cours = False
                 print("GAME OVER")
@@ -45,6 +48,9 @@ class Game :
             self.screen.fill(BACKGROUND_COLOR)
             self.snake.draw(self.screen)
             self.food.draw(self.screen)
+            #ce qui suit c'est pour afficher le score en haut à gauche de l'ecran
+            score_texte = self.font.render(f"SCORE : {self.score}", True, (255, 255, 255))
+            self.screen.blit(score_texte, (10, 10))
             pygame.display.flip()
             pygame.time.Clock().tick(FPS)
             
